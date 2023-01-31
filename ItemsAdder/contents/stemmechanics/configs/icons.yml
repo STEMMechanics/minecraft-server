@@ -1,0 +1,108 @@
+info:
+    namespace: stemmechanics
+font_images:
+    crafting_table:
+        show_in_gui: true
+        suggest_in_command: false
+        path: font/icons/crafting_table.png
+        symbol: "\uE800"
+        scale_ratio: 9
+        y_position: 8
+    enchantment_table:
+        show_in_gui: true
+        suggest_in_command: false
+        path: font/icons/enchantment_table.png
+        symbol: "\uE801"
+        scale_ratio: 9
+        y_position: 8
+    skeleton_head_front:
+        show_in_gui: true
+        suggest_in_command: false
+        path: font/icons/skeleton_head_front.png
+        symbol: "\uE802"
+        scale_ratio: 9
+        y_position: 8
+    chat_bubble:
+        show_in_gui: true
+        suggest_in_command: false
+        path: font/icons/chat_bubble.png
+        symbol: "\uE803"
+        scale_ratio: 24
+        y_position: 24
+    info_yellow:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/info_yellow.png
+        symbol: "\uE804"
+        scale_ratio: 24
+        y_position: 24
+    info_blue:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/info_blue.png
+        symbol: "\uE805"
+        scale_ratio: 24
+        y_position: 24
+    info_green:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/info_green.png
+        symbol: "\uE806"
+        scale_ratio: 24
+        y_position: 24
+    question_yellow:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/question_yellow.png
+        symbol: "\uE807"
+        scale_ratio: 24
+        y_position: 24
+    question_blue:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/question_blue.png
+        symbol: "\uE808"
+        scale_ratio: 24
+        y_position: 24
+    question_green:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/question_green.png
+        symbol: "\uE809"
+        scale_ratio: 24
+        y_position: 24
+    world:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/world.png
+        symbol: "\uE80A"
+        scale_ratio: 9
+        y_position: 8
+    location:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/location.png
+        symbol: "\uE80B"
+        scale_ratio: 9
+        y_position: 8
+    house:
+        show_in_gui: false
+        suggest_in_command: false
+        path: font/icons/house.png
+        symbol: "\uE80C"
+        scale_ratio: 9
+        y_position: 8
+    purple_bed:
+        permission: emoji.mcemojis.purple_bed
+        show_in_gui: true
+        path: font/icons/purple_bed.png
+        symbol: "\uE80D"
+        scale_ratio: 9
+        y_position: 8
+    green_bed:
+        permission: emoji.mcemojis.green_bed
+        show_in_gui: true
+        path: font/icons/green_bed.png
+        symbol: "\uE80E"
+        scale_ratio: 9
+        y_position: 8

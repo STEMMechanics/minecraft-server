@@ -1,0 +1,43 @@
+info:
+    namespace: stemmechanics
+font_images:
+    staff:
+        permission: "stemmechanics.role.staff"
+        show_in_gui: true
+        suggest_in_command: false
+        path: "font/roles/staff.png"
+        symbol: "\uE880"
+        scale_ratio: 9
+        y_position: 8
+    mod:
+        permission: "stemmechanics.role.mod"
+        show_in_gui: true
+        suggest_in_command: false
+        path: "font/roles/mod.png"
+        symbol: "\uE881"
+        scale_ratio: 9
+        y_position: 8
+    helper:
+        permission: "stemmechanics.role.helper"
+        show_in_gui: true
+        suggest_in_command: false
+        path: "font/roles/helper.png"
+        symbol: "\uE882"
+        scale_ratio: 9
+        y_position: 8
+    knight:
+        permission: "stemmechanics.role.knight"
+        show_in_gui: true
+        suggest_in_command: false
+        path: "font/roles/knight.png"
+        symbol: "\uE883"
+        scale_ratio: 9
+        y_position: 8
+    boost:
+        permission: "stemmechanics.role.boost"
+        show_in_gui: true
+        suggest_in_command: false
+        path: "font/roles/boost.png"
+        symbol: "\uE884"
+        scale_ratio: 9
+        y_position: 8

@@ -1,0 +1,21 @@
+info:
+    namespace: stemmechanics
+font_images:
+    stemmech_logo:
+        suggest_in_command: false
+        path: font/ui/stemmech_logo.png
+        symbol: "\uE901"
+        y_position: 32
+        scale_ratio: 64
+    logo_menu_top:
+        suggest_in_command: false
+        path: font/ui/logo_menu_top.png
+        symbol: "\uE902"
+        y_position: 16
+        scale_ratio: 64
+minecraft_lang_overwrite:
+    esc_menu_texts:
+        entries:
+            menu.game: ":logo_menu_top:"
+        languages:
+            - ALL
