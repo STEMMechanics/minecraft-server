@@ -14,6 +14,195 @@ stemmechd_pvp:
         flint_and_steel:
             copper_ingot: 2
 
+        armour:
+            leather_helmet:
+                price:
+                    copper_ingot: 1
+                enchants:
+                    protection_environmental: 1
+            leather_leggings:
+                price:
+                    copper_ingot: 1
+                enchants:
+                    protection_environmental: 1
+            leather_boots:
+                price:
+                    copper_ingot: 1
+                enchants:
+                    protection_environmental: 1
+            chainmail_chestplate:
+                price:
+                    iron_ingot: 1
+                enchants:
+                    protection_environmental: 1
+            chainmail_chestplate:
+                price:
+                    iron_ingot: 3
+                enchants:
+                    protection_environmental: 2
+            chainmail_chestplate:
+                price:
+                    iron_ingot: 7
+                enchants:
+                    protection_environmental: 3
+            iron_helmet:
+                price:
+                    gold_ingot: 10
+                enchants:
+                    protection_environmental: 2
+        swords:
+            stick:
+                price:
+                    copper_ingot: 8
+                enchants:
+                    knockback: 1
+            golden_sword:
+                price:
+                    iron_ingot: 1
+                enchants:
+                    damage_all: 1
+            golden_sword:
+                price:
+                    iron_ingot: 3
+                enchants:
+                    damage_all: 2
+            golden_sword:
+                price:
+                    iron_ingot: 7
+                enchants:
+                    damage_all: 3
+            golden_sword:
+                price:
+                    gold_ingot: 7
+                enchants:
+                    damage_all: 2
+                    knockback: 1
+            golden_axe:
+                price:
+                    gold_ingot: 15
+                display-name: Axe of Infinity
+                enchants:
+                    damage_all: 1
+                    durability: 1
+                    knockback: 1
+        bows:
+            bow:
+                price:
+                    gold_ingot: 3
+                enchants:
+                    arrow_infinite: 1
+            bow:
+                price:
+                    gold_ingot: 7
+                enchants:
+                    arrow_infinite: 1
+                    arrow_damage: 1
+            bow:
+                price:
+                    gold_ingot: 13
+                enchants:
+                    arrow_infinite: 1
+                    arrow_damage: 2
+            bow:
+                price:
+                    gold_ingot: 14
+                enchants:
+                    arrow_infinite: 1
+                    arrow_fire: 1
+            bow:
+                price:
+                    gold_ingot: 15
+                enchants:
+                    arrow_infinite: 1
+                    arrow_fire: 1
+                    arrow_knockback: 1
+            arrow:
+                price:
+                    gold_ingot: 1
+        food:
+            cooked_porkchop:
+                quantity: 2
+                price:
+                    copper_ingot: 4
+            golden_apple:
+                price:
+                    iron_ingot: 2
+            bread:
+                quantity: 10
+                price:
+                    gold_ingot: 5
+        potions:
+            potion:
+                potion-type: healing
+                price:
+                    iron_ingot: 3
+            potion:
+                potion-type: strong_healing
+                price:
+                    iron_ingot: 5
+            potion:
+                potion-type: swiftness
+                price:
+                    iron_ingot: 7
+            potion:
+                potion-type: strength
+                price:
+                    gold_ingot: 1
+            potion:
+                potion-type: regeneration
+                price:
+                    gold_ingot: 3
+        blocks:
+            cut_sandstone:
+                quantity: 2
+                price:
+                    copper_ingot: 1
+            end_stone:
+                quantity: 3
+                price:
+                    copper_ingot: 7
+            iron_block:
+                price:
+                    iron_ingot: 3
+            glowstone:
+                quantity: 4
+                price:
+                    copper_ingot: 15
+            glass_block:
+                price:
+                    copper_ingot: 4
+        useful:
+            chest:
+                price:
+                    iron_ingot: 1
+            ender_chest:
+                price:
+                    gold_ingot: 1
+            tnt:
+                price:
+                    iron_ingot: 3
+            # autotnt?
+            # proxytnt?
+            # random warp potion?
+            # string, steping on freezes player and alerts placer (trap)
+
+        pickaxes:
+            iron_pickaxe:
+                price:
+                    copper_ingot: 4
+                enchant:
+                    loot_bonus_blocks: 1
+            iron_pickaxe:
+                price:
+                    iron_ingot: 2
+                enchant:
+                    loot_bonus_blocks: 2
+            iron_pickaxe:
+                price:
+                    gold_ingot: 1
+                enchant:
+                    loot_bonus_blocks: 3
+
 stemmechw_pvp:
     type: world
     debug: false
