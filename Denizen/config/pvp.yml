@@ -1,0 +1,191 @@
+pvp:
+  shops:
+    armour:
+      - item: leather_helmet
+        cost:
+          copper_ingot: 1
+        enchants:
+          - protection_environmental,1
+      - item: leather_leggings
+        cost:
+          copper_ingot: 1
+        enchants:
+          - protection_environmental,1
+      - item: leather_boots
+        cost:
+          copper_ingot: 1
+        enchants:
+          - protection_environmental,1
+      - item: chainmail_chestplate
+        cost:
+          iron_ingot: 1
+        enchants:
+          - protection_environmental,1
+      - item: chainmail_chestplate
+        cost:
+          iron_ingot: 3
+        enchants:
+          - protection_environmental,2
+      - item: chainmail_chestplate
+        cost:
+          iron_ingot: 7
+        enchants:
+          - protection_environmental,3
+      - item: iron_helmet
+        cost:
+          gold_ingot: 10
+        enchants:
+          - protection_environmental,2
+    swords:
+      - item: stick
+        cost:
+          copper_ingot: 8
+        enchants:
+          - knockback,1
+      - item: golden_sword:
+        cost:
+          iron_ingot: 1
+        enchants:
+          - damage_all,1
+      - item: golden_sword
+        cost:
+          iron_ingot: 3
+        enchants:
+          - damage_all,2
+      - item: golden_sword
+        cost:
+          iron_ingot: 7
+        enchants:
+          - damage_all,3
+      - item: golden_sword
+        cost:
+          gold_ingot: 7
+        enchants:
+          - damage_all,2
+          - knockback,1
+      - item: golden_axe
+        cost:
+          gold_ingot: 15
+        display-name: Axe of Infinity
+        enchants:
+          - damage_all,1
+          - durability,1
+          - knockback,1
+    bows:
+      - item: bow
+        cost:
+          gold_ingot: 3
+        enchants:
+          - arrow_infinite,1
+      - item: bow
+        cost:
+          gold_ingot: 7
+        enchants:
+          - arrow_infinite,1
+          - arrow_damage,1
+      - item: bow
+        cost:
+          gold_ingot: 13
+        enchants:
+          - arrow_infinite,1
+          - arrow_damage,2
+      - item: bow
+        cost:
+          gold_ingot: 14
+        enchants:
+          - arrow_infinite,1
+          - arrow_fire,1
+      - item: bow
+        cost:
+          gold_ingot: 15
+        enchants:
+          - arrow_infinite,1
+          - arrow_fire,1
+          - arrow_knockback,1
+      - item: arrow
+        cost:
+          gold_ingot: 1
+    food:
+      - item: cooked_porkchop
+        quantity: 2
+        cost:
+          copper_ingot: 4
+      - item: golden_apple
+        cost:
+          iron_ingot: 2
+      - item: bread
+        quantity: 10
+        cost:
+          gold_ingot: 5
+    potions:
+      - item: potion
+        potion-type: healing
+        cost:
+          iron_ingot: 3
+      - item: potion
+        potion-type: instant_healing
+        potion-upgraded: true
+        cost:
+          iron_ingot: 5
+      - item: potion
+        potion-type: swiftness
+        cost:
+          iron_ingot: 7
+      - item: potion
+        potion-type: strength
+        cost:
+          gold_ingot: 1
+      - item: potion
+        potion-type: regeneration
+        cost:
+          gold_ingot: 3
+    blocks:
+      - item: cut_sandstone
+        quantity: 2
+        cost:
+          copper_ingot: 1
+      - item: end_stone
+        quantity: 3
+        cost:
+          copper_ingot: 7
+      - item: iron_block
+        cost:
+          iron_ingot: 3
+      - item: glowstone
+        quantity: 4
+        cost:
+          copper_ingot: 15
+      - item: glass_block
+        cost:
+          copper_ingot: 4
+    useful:
+      - item: chest
+        cost:
+          iron_ingot: 1
+      - item: ender_chest
+        cost:
+          gold_ingot: 1
+      - item: tnt
+        cost:
+          iron_ingot: 3
+      # autotnt?
+      # proxytnt?
+      # random warp potion?
+      # string, steping on freezes player and alerts placer (trap)
+
+    pickaxes:
+      iron_pickaxe:
+        cost:
+          copper_ingot: 4
+        enchant:
+          loot_bonus_blocks: 1
+      iron_pickaxe:
+        cost:
+          iron_ingot: 2
+        enchant:
+          loot_bonus_blocks: 2
+      iron_pickaxe:
+        cost:
+          gold_ingot: 1
+        enchant:
+          loot_bonus_blocks: 3
