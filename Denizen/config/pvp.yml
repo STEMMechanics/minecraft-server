@@ -42,7 +42,7 @@ pvp:
           copper_ingot: 8
         enchants:
           - knockback,1
-      - item: golden_sword:
+      - item: golden_sword
         cost:
           iron_ingot: 1
         enchants:
@@ -119,16 +119,16 @@ pvp:
           gold_ingot: 5
     potions:
       - item: potion
-        potion-type: healing
+        potion-type: instant_heal
         cost:
           iron_ingot: 3
       - item: potion
-        potion-type: instant_healing
+        potion-type: instant_heal
         potion-upgraded: true
         cost:
           iron_ingot: 5
       - item: potion
-        potion-type: swiftness
+        potion-type: speed
         cost:
           iron_ingot: 7
       - item: potion
@@ -136,7 +136,7 @@ pvp:
         cost:
           gold_ingot: 1
       - item: potion
-        potion-type: regeneration
+        potion-type: regen
         cost:
           gold_ingot: 3
     blocks:
@@ -174,18 +174,18 @@ pvp:
       # string, steping on freezes player and alerts placer (trap)
 
     pickaxes:
-      iron_pickaxe:
+      - item: iron_pickaxe
         cost:
           copper_ingot: 4
-        enchant:
-          loot_bonus_blocks: 1
-      iron_pickaxe:
+        enchants:
+          - loot_bonus_blocks,1
+      - item: iron_pickaxe
         cost:
           iron_ingot: 2
-        enchant:
-          loot_bonus_blocks: 2
-      iron_pickaxe:
+        enchants:
+          - loot_bonus_blocks,2
+      - item: iron_pickaxe
         cost:
           gold_ingot: 1
-        enchant:
-          loot_bonus_blocks: 3
+        enchants:
+          - loot_bonus_blocks,3
