@@ -3,7 +3,7 @@ hologram_data:
     debug: false
     offsets:
         hologram_base: 0.2
-        hologram_line: 0.25
+        hologram_line: 0.4
 
 hologram_events:
     type: world
@@ -14,7 +14,7 @@ hologram_events:
         
         on player walks:
             - if <proc[stemmech_feature_is_ready].context[hologram].if_null[false]>:
-                - hologram_spawn_update def.player:<player>
+                - run hologram_spawn_update def.player:<player>
 
 hologram_initalize:
     type: task
@@ -46,8 +46,8 @@ hologram_create:
         # - define location:<[defs].get[2]>
         # - define lines:<[defs].remove[1|2]>
 
-        - flag server hologram.list.<[id]>.location:<[location]>
-        - flag server hologram.list.<[id]>.location:<[lines]>
+        - flag server hologram.list.<[id]>.location:<[location].round>
+        - flag server hologram.list.<[id]>.lines:<[lines]>
 
         - foreach <server.online_players>:
             - run hologram_spawn_update def:<[value]>
@@ -58,10 +58,12 @@ hologram_update:
     definitions: id|lines
     script:
         - if <server.has_flag[hologram.list.<[id]>]>:
+            - foreach <server.players.filter[has_flag[hologram.list.<[id]>]]>:
+                - foreach <[value].flag[hologram.list.<[id]>]>:
+                    - remove <[value]>
+                - flag <[value]> hologram.list.<[id]>:!
+
             - flag server hologram.list.<[id]>.lines:<[lines]>
-            - ~run hologram_delete def.id:<[id]>
-            - flag server hologram.list.<[id]>.location:<[location]>
-            - flag server hologram.list.<[id]>.location:<[lines]>
 
             - foreach <server.online_players>:
                 - run hologram_spawn_update def:<[value]>
@@ -70,12 +72,13 @@ hologram_spawn_update:
     type: task
     debug: false
     definitions: player
-        - define configuration <script[hologram_data].data_key[]>
+    script:
+        - define configuration:<script[hologram_data].data_key[]>
 
         # iterate holograms in the same world as the player and the player should see them (100 blocks away)
-        - foreach <server.flag[hologram.list].filter_tag[<[filter_value].location.world.equals[<[player].location.world>].and[<[filter_value].location.distance_squared[<[player].location>].is_less_than[100]>]>].if_null[<map>]> key:id as:hologram_data:
+        - foreach <server.flag[hologram.list].filter_tag[<[filter_value].get[location].world.equals[<[player].location.world>].and[<[filter_value].get[location].distance_squared[<[player].location>].is_less_than[500]>]>].if_null[<map>]> key:id as:hologram_data:
             # remove entire id if any are despawned
-            - if !<[player].has_flag[hologram.list.<[id]>]> || <[player].flag[hologram.list.<[id]>].filter[is_spawned.equals[false]].count> > 0:
+            - if !<[player].has_flag[hologram.list.<[id]>]> || <[player].flag[hologram.list.<[id]>].filter[is_spawned.equals[false]].count.if_null[0]> > 0:
                 - foreach <[player].flag[hologram.list.<[id]>].if_null[<list>]>:
                     - remove <[value]>
                 - flag <[player]> hologram.list.<[id]>:!
@@ -84,7 +87,7 @@ hologram_spawn_update:
                 - foreach <[hologram_data].get[lines]> as:line:
                     - define stand <entity[armor_stand].with[marker=true;visible=false;invulnerable=true;custom_name_visible=true;custom_name=<[line]>]>
                     - define offset <[loop_index].mul[<[configuration.offsets.hologram_line]>].add[<[configuration.offsets.hologram_base]>]>
-                    - fakespawn <[stand]> <player.location.above[<[offset]>]> d:5m save:stand players:<server.online_players>
+                    - fakespawn <[stand]> <[hologram_data].get[location].below[<[offset]>]> d:5m save:stand players:<server.online_players>
                     - define spawned_stands:->:<entry[stand].faked_entity>
                 
                 - flag <[player]> hologram.list.<[id]>:<[spawned_stands]>

@@ -31,7 +31,7 @@ pvp_events:
         
         on player kills player:
             - if <player.location.world.name> == pvp:
-                - flag server scoreboard.<[player].uuid>:++
+                - flag server pvp.scoreboard.<[player].uuid>:++
 
         on player respawns flagged:pvp:
             - if <player.location.world.name> == pvp:
@@ -61,14 +61,16 @@ pvp_events:
                     - drop iron_ingot <[loc]>
 
         on system time minutely every:5:
+            - if !<server.has_flag[pvp.ready]>:
+                - if <world[pvp].players.size.if_null[0]> > 0 || <server.worlds.parse[name].contains[pvp]>:
+                    - flag server pvp.ready
+                - else:
+                    - run pvp_restore
+
             - if <world[pvp].players.size.if_null[0]> > 0:
                 - foreach <server.flag[pvp.spawners.gold].if_null[<list>]>:
                     - define loc:<location[<[value]>].add[-2,-2,-2].to_cuboid[<location[<[value]>].add[2,2,2]>].spawnable_blocks.random.if_null[<location[<[value]>]>]>
                     - drop gold_ingot <[loc]>
-        
-        # on system time minutely every:10:
-        #     - if <world[pvp].players.size> > 0:
-        #         - run pvp_shopkeepers_setup
 
 pvp_initalize:
     type: task
@@ -95,13 +97,15 @@ pvp_scoreboard_update:
     script:
         - define scoreboard:<server.flag[pvp.scoreboard].if_null[<map>]>
         - define scoreboard:<[scoreboard].sort_by_value.reverse>
-        - define scoreboard:<[scoreboard].get_subset[<[scoreboard].keys.first[5]>]>
         
-        - define "scoreboard_lines:->:<yellow>PvP Scoreboard"
+        - define line_count <list[<[scoreboard].size>|5].lowest>
+        
+        - define scoreboard:<[scoreboard].get_subset[<[scoreboard].keys.first[<[line_count]>]>]>
+        - define "scoreboard_lines:->:<green>♦♦ <yellow>PvP Scoreboard <green>♦♦"
         - foreach <[scoreboard]>:
-            - define "scoreboard_lines:->:<white><[value]> <light_purple><player[<[key]>].name.if_null[Unknown]>"
+            - define "scoreboard_lines:->:<light_purple><player[<[key]>].name.if_null[Unknown]>   <white><[value]>"
 
-        - run hologram_update def.id:scoreboard def.lines:<[scoreboard_lines]>
+        - run hologram_update def.id:pvp def.lines:<[scoreboard_lines]>
 
 pvp_restore:
     type: task
@@ -122,7 +126,7 @@ pvp_shopkeepers_setup:
     type: task
     debug: false
     script:
-        - foreach <server.flag[pvp.shopkeepers]> as:shopkeeper_data:
+        - foreach <server.flag[pvp.shopkeepers].if_null[<list>]> as:shopkeeper_data:
             - if <[shopkeeper_data].keys.contains[npc]>:
                 - if !<server.npcs.contains[<[shopkeeper_data].get[npc]>]>:
                     - flag server pvp.shopkeepers[<[loop_index]>]:<[shopkeeper_data].exclude[npc]>
@@ -197,12 +201,14 @@ pvp_command:
                             - narrate "Spawner added"
                     - case rem remove:
                         - define count:0
-                        - foreach <server.flag[pvp.spawners]> key:spawner_type as:spawner_location_list:
+                        - foreach <server.flag[pvp.spawners].if_null[<list>]> key:spawner_type as:spawner_location_list:
                             - foreach <[spawner_location_list]> as:spawner_location:
                                 - if <player.location.distance_squared[<[spawner_location]>]> <= 10:
                                     - flag server pvp.spawners.<[spawner_type]>:<server.flag[pvp.spawners.<[spawner_type]>].remove[<[loop_index]>]>
                                     - define count:++
                         - narrate "Removed <[count]> spawners"
+                    - default:
+                        - narrate "No sub command was entered"
             - case shopkeeper:
                 - choose <context.args.get[2].if_null[null]>:
                     - case add:
@@ -211,12 +217,17 @@ pvp_command:
                         - narrate "Shopkeeper added"
                         - run pvp_shopkeepers_setup
                     - case rem remove:
-                        - foreach <server.flag[pvp.shopkeepers]> as:shopkeeper_data:
+                        - define count:0
+                        - foreach <server.flag[pvp.shopkeepers].if_null[<list>]> as:shopkeeper_data:
                             - if <player.location.distance_squared[<[shopkeeper_data].get[location]>]> <= 10:
                                 - if <[shopkeeper_data].keys.contains[npc]>:
                                     - remove <[shopkeeper_data].get[npc]>
                                 - flag server pvp.shopkeepers:<server.flag[pvp.shopkeepers].remove[<[loop_index]>]>
                                 - define count:++
                         - narrate "Removed <[count]> shopkeepers"
+                    - default:
+                        - narrate "No sub command was entered"
             - case scoreboard:
-                - run hologram_create def.id:hologram def.location:<player.location> def.lines:<server.flag[pvp.scoreboard]>
+                - ~run hologram_create def.id:pvp def.location:<player.location> def.lines:<list[loading...]>
+                - wait 1t
+                - run pvp_scoreboard_update

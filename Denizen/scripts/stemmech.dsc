@@ -38,7 +38,7 @@ stemmech_feature_register:
                 - flag server stemmech.features.<[id]>:loading
                 - if <util.scripts.parse[name].contains[<[id]>_initalize]>:
                     - run <[initalize].exists.if_true[<[initalize]>].if_false[<[id]>_initalize]> def.id:<[id]>
-            - else
+            - else:
                 - announce to_console "<red><[id]>: Timeout waiting for STEMMech to load"
 
 stemmech_feature_set_ready:
@@ -56,7 +56,7 @@ stemmech_feature_is_ready:
     type: procedure
     debug: false
     script:
-        - define id_list:<queue.definitions.exclude[raw_context].if_null[<list>]>
+        - define id_list:<queue.definition_map.exclude[raw_context].values.if_null[<list>]>
         - if <[id_list].size> > 0:
             - foreach <[id_list]>:
                 - if <server.flag[stemmech.features.<[value]>].equals[ready].if_null[false]> == false:
