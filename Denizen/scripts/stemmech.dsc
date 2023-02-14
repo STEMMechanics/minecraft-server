@@ -23,12 +23,18 @@ stemmech_initalize:
 stemmech_feature_register:
     type: task
     debug: false
-    definitions: id|initalize
+    definitions: id|initalize|requires
     script:
         - wait 2t
         - if <queue.definitions.contains[id]>:
             - waituntil max:1s <server.has_flag[stemmech.loaded]>
             - if <server.has_flag[stemmech.loaded]>:
+                - if <[requires].exists>:
+                    - waituntil max:5s <proc[stemmech_feature_is_ready].context[<[requires]>]>
+                    - if !<proc[stemmech_feature_is_ready].context[<[requires]>]>:
+                        - announce to_console "<red><[id]>: Timeout waiting for dependencies to be ready"
+                        - stop
+
                 - flag server stemmech.features.<[id]>:loading
                 - if <util.scripts.parse[name].contains[<[id]>_initalize]>:
                     - run <[initalize].exists.if_true[<[initalize]>].if_false[<[id]>_initalize]> def.id:<[id]>
