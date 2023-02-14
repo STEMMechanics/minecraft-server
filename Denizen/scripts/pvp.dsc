@@ -3,7 +3,7 @@ pvp_events:
     debug: false
     events:
         on scripts loaded:
-            - run stemmech_feature_register def.id:pvp
+            - run stemmech_feature_register def.id:pvp def.requires:hologram
 
         on player teleports:
             - if <context.destination.world.name> == pvp:
@@ -28,6 +28,10 @@ pvp_events:
         on player dies:
             - if <player.location.world.name> == pvp:
                 - flag <player> pvp expire:1m
+        
+        on player kills player:
+            - if <player.location.world.name> == pvp:
+                - flag server scoreboard.<[player].uuid>:++
 
         on player respawns flagged:pvp:
             - if <player.location.world.name> == pvp:
@@ -71,6 +75,8 @@ pvp_initalize:
     debug: false
     script:
         - ~run stemmech_yaml_load def.id:pvp
+        - ~run pvp_scoreboard_update
+
         - run stemmech_feature_set_ready def.id:pvp
         
         - ~run stemmech_feature_wait_until_ready def.id:tabcomplete def.path:<script>|tabcomplete
@@ -82,6 +88,20 @@ pvp_initalize:
         - run tabcomplete_completion def:pvp|spawner|remove
         - run tabcomplete_completion def:pvp|shopkeeper|add
         - run tabcomplete_completion def:pvp|shopkeeper|remove
+
+pvp_scoreboard_update:
+    type: task
+    debug: false
+    script:
+        - define scoreboard:<server.flag[pvp.scoreboard].if_null[<map>]>
+        - define scoreboard:<[scoreboard].sort_by_value.reverse>
+        - define scoreboard:<[scoreboard].get_subset[<[scoreboard].keys.first[5]>]>
+        
+        - define "scoreboard_lines:->:<yellow>PvP Scoreboard"
+        - foreach <[scoreboard]>:
+            - define "scoreboard_lines:->:<white><[value]> <light_purple><player[<[key]>].name.if_null[Unknown]>"
+
+        - run hologram_update def.id:scoreboard def.lines:<[scoreboard_lines]>
 
 pvp_restore:
     type: task
@@ -198,3 +218,5 @@ pvp_command:
                                 - flag server pvp.shopkeepers:<server.flag[pvp.shopkeepers].remove[<[loop_index]>]>
                                 - define count:++
                         - narrate "Removed <[count]> shopkeepers"
+            - case scoreboard:
+                - run hologram_create def.id:hologram def.location:<player.location> def.lines:<server.flag[pvp.scoreboard]>
