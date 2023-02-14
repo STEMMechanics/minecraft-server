@@ -52,5 +52,6 @@ Temporary Items
 # Ignore all local history of files
 .history
 .ionide
+.dccache
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode
