@@ -5,8 +5,7 @@ stemmechw_api:
         on scripts loaded server_flagged:stemmech.api:
             - run stemmecht_api_load
         
-        on webserver web request:port:<server.flag[stemmech.api.port]> server_flagged:stemmech.api:
-            - 
+        # on webserver web request port:<server.flag[stemmech.api.port]> server_flagged:stemmech.api:
 
 stemmecht_api_load:
     type: task
