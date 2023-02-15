@@ -74,7 +74,7 @@ infobar_update_single:
         - define world:<[target_player].flag[infobar.world].if_null[NA]>
         - define direction:<[target_player].flag[infobar.direction].if_null[NA]>
 
-        - define time:<[target_location].world.flag[stemmech.common.time].get[12h].if_null[0]>.<[target_location].world.flag[stemmech.common.time].get[15m].if_null[0]><[target_location].world.flag[stemmech.common.time].get[ap].if_null[]>
+        - define time:<[target_location].world.flag[stemmech.time].get[12h].if_null[0]>.<[target_location].world.flag[stemmech.time].get[15m].if_null[0]><[target_location].world.flag[stemmech.time].get[ap].if_null[]>
 
         - define bossbar_id:<[target_player].uuid>_infobar
         - define "bossbar_title:<&chr[E80A]> <[world]> <&chr[E381]> <[time]> <&chr[E388]> <[direction]>"
