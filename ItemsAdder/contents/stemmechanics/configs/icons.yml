@@ -106,3 +106,9 @@ font_images:
         symbol: "\uE80E"
         scale_ratio: 9
         y_position: 8
+    discord:
+        show_in_gui: true
+        path: font/icons/discord.png
+        symbol: "\uE80F"
+        scale_ratio: 9
+        y_position: 8
