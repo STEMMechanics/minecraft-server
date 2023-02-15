@@ -30,6 +30,10 @@ infobar_events:
 
         on system time secondly every:3:
             - run infobar_update
+        
+        on player respawns:
+            - ~run infobar_update_player_world def:<player>|<context.location>
+            - run infobar_update_single def:<player>|<context.location>
 
 infobar_initalize:
     type: task
