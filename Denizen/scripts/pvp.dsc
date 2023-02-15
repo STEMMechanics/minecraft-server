@@ -130,8 +130,8 @@ pvp_shopkeepers_setup:
             - if <[shopkeeper_data].keys.contains[npc]>:
                 - if !<server.npcs.contains[<[shopkeeper_data].get[npc]>]>:
                     - flag server pvp.shopkeepers[<[loop_index]>]:<[shopkeeper_data].exclude[npc]>
-                - else if !<[shopkeeper_data].get[npc].is_spawned>:
-                    - spawn <[shopkeeper_data].get[npc]> <[shopkeeper_data].get[location]>
+                - else if !<[shopkeeper_data].get[npc].as_npc.is_spawned>:
+                    - spawn <[shopkeeper_data].get[npc].as_npc> <[shopkeeper_data].get[location]>
 
             - if !<[shopkeeper_data].keys.contains[npc]>:
                 - create villager Shopkeeper <[shopkeeper_data].get[location]> save:result
