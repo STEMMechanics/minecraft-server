@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Connect to SFTP server and upload files
+        uses: jvanderl/bitvise-sftp-action@v1
+        with:
+          server: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SFTP_PORT }}
+          local_path: |
+            Denizen/scripts
+            ItemsAdder/content/stemmechanics
+          remote_path: |
+            plugins/Denizen/scripts
+            plugins/ItemsAdder/content/stemmechanics
+          delete_remote_files: true
+
+      - name: Reload server
+        run: |
+          curl -X POST -H "Authorization: Bearer ${{ secrets.SERVER_TOKEN }}" http://mc.stemmech.com.au/api/server/reload
