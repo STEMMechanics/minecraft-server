@@ -10,6 +10,14 @@ stemmech_events:
             - foreach <server.worlds> as:target_world:
                 - flag <[target_world]> stemmech.time:<proc[stemmech_world_time_map].context[<[target_world]>]>
 
+        on system time minutely every:10 server_flagged:stemmech.loaded:
+            - flag server stemmech.log_time:<util.time_now.format[YYYY-MM-dd]>
+            - run stemmech_yaml_save_all
+
+        on system time hourly server_flagged:stemmech.loaded:
+            - flag server stemmech.log_time:<util.time_now.format[YYYY-MM-dd]>
+
+
 stemmech_initalize:
     type: task
     debug: false
@@ -17,6 +25,7 @@ stemmech_initalize:
         - flag server stemmech:!
 
         - flag server "stemmech.messages.command_only_players:This command is only available for players"
+        - flag server stemmech.log_time:<util.time_now.format[YYYY-MM-dd]>
 
         - flag server stemmech.loaded
 
@@ -103,6 +112,24 @@ stemmech_yaml_load:
             - yaml id:<[id]> load:<[type]>/<[id]>.yml
         - else:
             - yaml id:<[id]> create
+        
+        - if !<server.has_flag[stemmech.yaml.<[id]>]>:
+            - flag server stemmech.yaml.<[id]>:<[type]>/<[id]>.yml
+
+stemmech_yaml_save:
+    type: task
+    debug: false
+    definitions: id
+    script:
+        - if <server.has_flag[stemmech.yaml.<[id]>]>:
+            - yaml id:<[id]> savefile:<server.flag[stemmech.yaml.<[id]>]>
+
+stemmech_yaml_save_all:
+    type: task
+    debug: false
+    script:
+        - foreach <server.flag[stemmech.yaml].if_null[<map>]>:
+            - yaml id:<[key]> savefile:<[value]>
 
 stemmech_world_time_formatted:
     type: procedure
@@ -139,3 +166,26 @@ stemmech_world_time_map:
             - define 15m:00
 
         - determine <map[h=<[hours]>;m=<[mins]>;15m=<[15m]>;12h=<[12h]>;ap=<[apm]>]>
+
+stemmech_determination_mapper:
+    type: procedure
+    debug: false
+    script:
+        - define determination:<queue.definition_map.exclude[raw_context]>
+        - define data:<map>
+
+        - if <[determination]> != null && <[determination].size> > 0:
+            - foreach <[determination]>:
+                - if <[value].object_type> == element:
+                    - if <[value].contains[:]>:
+                        - define data:<[data].with[<[value].before[:]>].as[<[value].after[:]>]>
+                    - else if <[value].is_decimal>:
+                        - define data:<[data].with[decimal].as[<[value]>]>
+                    - else if <[value]> == cancelled:
+                        - define data:<[data].with[cancelled].as[true]>
+                    - else:
+                        - define data:<[data].with[text].as[<[value]>]>
+                - else:
+                    - define data:<[data].with[<[value].object_type>].as[<[value]>]>
+
+        - determine <[data]>
