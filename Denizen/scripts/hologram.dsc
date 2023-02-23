@@ -58,9 +58,10 @@ hologram_update:
     definitions: id|lines
     script:
         - if <server.has_flag[hologram.list.<[id]>]>:
-            - foreach <server.players.filter[has_flag[hologram.list.<[id]>]]>:
-                - foreach <[value].flag[hologram.list.<[id]>]>:
-                    - remove <[value]>
+            - foreach <server.players.filter[has_flag[hologram.list.<[id]>]]> as:target_player:
+                - foreach <[target_player].flag[hologram.list.<[id]>].if_null[<list>]>:
+                    - define removal_list:<[value].filter_tag[<[target_player].fake_entities.contains[<[filter_value]>]>]>
+                    - remove <[removal_list]>
                 - flag <[value]> hologram.list.<[id]>:!
 
             - flag server hologram.list.<[id]>.lines:<[lines]>
